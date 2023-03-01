@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+ <style>
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url("https://images.squarespace-cdn.com/content/v1/5de93a2db580764b4f6963f9/db2e3bb7-ece1-47c1-92a0-7829d015b3d4/Sam+Wilson_New+Zealand.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h1{
+  margin-bottom: 60px;
+  color: rgba(102, 255, 255,1);
+
+}
+
+.container{
+  margin-top: 60px;
+  width: 100%;
+  max-width: 800px;
+  padding: 60px;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  background-color:rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+}
+
+.countdown-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+ul li {
+  display: inline-block;
+  padding: 0 5px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+ul li span {
+  display: block;
+  font-size: 50px;
+  padding-top: 5px;
+  color: rgba(102, 255, 255,0.8);
+  font-weight: 600;
+}
+
+ul li span:nth-child(2) {
+  font-size: 20px;
+}
+
+.greet {
+  color: rgba(102, 255, 255,1);
+  font-size: 25px;
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.coming-year {
+  font-size: 250px;
+  font-weight: 900;
+  color: rgba(255, 255, 255,0);
+}
+
+@media (max-width:768px) {
+  ul li span {
+    font-size: 10vw;
+  }
+
+  ul li span:nth-child(2) {
+    font-size: 15px;
+  }
+
+  .coming-year {
+    font-size: 40vw;
+    font-weight: 900;
+  }
+}
+ </style>
+</head>
+
+<body>
+  <div class="countdown-timer">
+    <div class="container">
+    <h1>Count Down Sarts</h1>
+    <ul>
+      <li>
+        <span class="days"></span>
+        <span>DAYS</span>
+      </li>
+      <li>
+        <span class="hours"></span>
+        <span>HOURS</span>
+      </li>
+      <li>
+        <span class="minutes"></span>
+        <span>MINUTES</span>
+      </li>
+      <li>
+        <span class="seconds"></span>
+        <span>SECONDS</span>
+      </li>
+    </ul>
+  </div>
+    <p class="coming-year"></p>
+  </div>
+  <script>
+    const comingYear = document.querySelector(".coming-year");
+const birthDate = prompt("Enter date (1-31):");
+const birthMonth = prompt("Enter month (1-12):");
+const today = new Date();
+var nextYear;
+if (today.getMonth() + 1 > birthMonth || (today.getMonth() + 1 == birthMonth && today.getDate() + 1 > birthDate)) {
+  nextYear = new Date().getFullYear() + 1;
+}
+else {
+  nextYear = new Date().getFullYear();
+}
+comingYear.innerHTML = nextYear;
+function countdown() {
+  const remaining = new Date(`${nextYear}-${birthMonth}-${birthDate} 00:00:00`) - new Date();
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(remaining / (1000 * 60 * 60)) % 24;
+  const minutes = Math.floor(remaining / (1000 * 60)) % 60;
+  const seconds = Math.floor(remaining / 1000) % 60;
+  document.querySelector(".days").innerHTML = days;
+  document.querySelector(".hours").innerHTML = hours;
+  document.querySelector(".minutes").innerHTML = minutes;
+  document.querySelector(".seconds").innerHTML = seconds;
+}
+countdown()
+setInterval(countdown, 1000);
+  </script>
+</body>
+
+</html>
